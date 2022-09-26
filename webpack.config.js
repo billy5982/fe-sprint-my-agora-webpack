@@ -1,12 +1,15 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { dirname } = require("path");
 module.exports = {
   entry: "./script.js",
   output: {
+    // 깃배포를 위해 docs를 사용
     path: path.resolve(__dirname, "docs"),
     filename: "app.bundle.js",
+    clean: true,
   },
   module: {
     rules: [
@@ -29,6 +32,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "common.css",
     }),
+    new CleanWebpackPlugin(),
   ],
   devServer: {
     static: {
